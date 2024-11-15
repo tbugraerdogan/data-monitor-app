@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://fcassignment-fsgsaff4bufrg4hk.westeurope-01.azurewebsites.net/:path*"
+    }
+  ]
+}
