@@ -1,0 +1,188 @@
+:root {
+  /* Primary colors used throughout the application */
+  --primary-color: #2a9d8f; /* Green color */
+  --secondary-color: #264653; /* Dark blue color */
+  --accent-color: #e9c46a; /* Yellow color */
+  --background-color: #f7f9fc; /* Light background color */
+  --error-color: #e74c3c; /* Softer red color for errors */
+  --alert-red: #e74c3c; /* Softer red color for alerts */
+  --text-primary: #2c3e50; /* Primary text color */
+  --text-secondary: #718096; /* Secondary text color */
+  --inactive-color: #6c757d; /* Grey-black color for inactive states */
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Shadow for cards */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color); /* Set background color */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Set font family */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center content horizontally and vertically */
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Padding around the container */
+}
+
+.monitor-card {
+  background: white;
+  border-radius: 12px; /* Rounded corners */
+  padding: 2rem; /* Padding inside the card */
+  width: 100%;
+  max-width: 480px; /* Maximum width of the card */
+  box-shadow: var(--card-shadow); /* Apply shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content inside the card */
+}
+
+.title {
+  color: var(--secondary-color); /* Set title color */
+  font-size: 1.75rem; /* Font size for the title */
+  margin-bottom: 1.5rem; /* Space below the title */
+  font-weight: 600; /* Bold font weight */
+}
+
+.error-message {
+  background-color: #fee2e2; /* Light red background for error message */
+  color: var(--error-color); /* Error text color */
+  padding: 0.75rem; /* Padding inside error message */
+  border-radius: 6px; /* Rounded corners for error message */
+  margin: 1rem 0; /* Margin above and below error message */
+  display: flex;
+  align-items: center; /* Center error message content */
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between data items */
+  width: 100%; /* Full width */
+}
+
+.data-item {
+  display: flex;
+  justify-content: space-between; /* Space between label and value */
+  align-items: center; /* Center items vertically */
+  padding: 1rem; /* Padding inside data item */
+  background-color: var(
+    --background-color
+  ); /* Background color for data item */
+  border-radius: 8px; /* Rounded corners */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+}
+
+.data-item:hover {
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow on hover */
+}
+
+.data-label {
+  color: var(--text-secondary); /* Label text color */
+  font-size: 0.875rem; /* Label font size */
+  font-weight: 500; /* Medium font weight */
+}
+
+.data-value {
+  color: var(--text-primary); /* Value text color */
+  font-weight: 600; /* Bold font weight */
+  font-size: 1rem; /* Value font size */
+}
+
+.data-value.highlight {
+  color: var(--primary-color); /* Highlight color for active data */
+  font-size: 1.25rem; /* Larger font size for highlighted value */
+}
+
+.data-value.inactive {
+  color: var(--inactive-color); /* Apply inactive color */
+  font-size: 1rem; /* Adjust font size for inactive state */
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between status dot and text */
+  margin-top: 1.5rem; /* Margin above the status indicator */
+  justify-content: center; /* Center the status indicator */
+}
+
+.status-dot {
+  width: 16px;
+  height: 16px; /* Size of the status dot */
+  background-color: var(--primary-color); /* Color of the active status dot */
+  border-radius: 50%; /* Make the dot round */
+  animation: pulse 2s infinite; /* Pulse animation */
+}
+
+.status-dot.inactive {
+  background-color: var(
+    --alert-red
+  ); /* Softer red color for inactive status dot */
+  animation: pulseRed 2s infinite; /* Animation for red dot */
+}
+
+/* Pulse animation for active status */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(42, 157, 143, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(42, 157, 143, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(42, 157, 143, 0);
+  }
+}
+
+/* Pulse animation for inactive status */
+@keyframes pulseRed {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(231, 76, 60, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+  }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 640px) {
+  .monitor-card {
+    padding: 1.5rem; /* Adjust padding for small screens */
+  }
+  .title {
+    font-size: 1.5rem; /* Adjust title font size for small screens */
+  }
+  .data-value.highlight {
+    font-size: 1.125rem; /* Adjust highlighted value font size for small screens */
+  }
+}
+
+.title,
+.realtime-text {
+  cursor: default; /* Prevents cursor from changing to pointer on hover */
+}
+
+.status-text {
+  color: var(--text-secondary); /* Status text color */
+  font-size: 0.875rem; /* Status text font size */
+  cursor: default; /* Prevents cursor from changing to pointer on hover */
+}
