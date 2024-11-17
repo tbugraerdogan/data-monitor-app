@@ -3,39 +3,47 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
+  // State to hold the fetched data
   const [data, setData] = useState(null);
+  // State to hold any error messages
   const [error, setError] = useState(null);
+  // State to track if the connection is active
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
+    // Function to fetch data from the API
     const fetchData = async () => {
       try {
+        // Make a GET request to the API endpoint with the necessary headers
         const response = await axios.get("/api/data", {
           headers: {
             "X-API-KEY": import.meta.env.VITE_API_KEY,
           },
         });
         console.log("New data received:", response.data);
+        // Update the state with the received data and reset the error and isActive state
         setData(response.data);
         setError(null);
         setIsActive(true);
       } catch (err) {
         console.error("Error fetching data:", err);
+        // Set error message and mark the connection as inactive
         setError("Error fetching data");
         setIsActive(false);
       }
     };
 
-    // Initial fetch
+    // Initial fetch when the component mounts
     fetchData();
 
-    // Set up polling every 5 seconds
+    // Set up polling every 5 seconds to fetch new data
     const intervalId = setInterval(fetchData, 5000);
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
+  // Function to format timestamp to GMT+1 (Europe/Paris timezone)
   const formatTimestampToGMTPlus1 = (timestamp) => {
     const date = new Date(timestamp);
     const options = {
