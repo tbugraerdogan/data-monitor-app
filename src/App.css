@@ -31,6 +31,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px; /* Padding around the container */
+  box-sizing: border-box; /* Ensure padding is included in element's total width and height */
 }
 
 .monitor-card {
@@ -43,6 +44,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* Center content inside the card */
+  box-sizing: border-box; /* Ensure padding is included in element's total width and height */
 }
 
 .title {
@@ -79,6 +81,7 @@ body {
   ); /* Background color for data item */
   border-radius: 8px; /* Rounded corners */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+  box-sizing: border-box; /* Ensure padding is included in element's total width and height */
 }
 
 .data-item:hover {
@@ -167,22 +170,23 @@ body {
 @media (max-width: 640px) {
   .monitor-card {
     padding: 1.5rem; /* Adjust padding for small screens */
+    margin: 10px; /* Add margin to prevent card from touching screen edges */
   }
   .title {
     font-size: 1.5rem; /* Adjust title font size for small screens */
   }
+  .data-item {
+    padding: 0.75rem; /* Reduce padding for data items */
+  }
+  .data-label,
+  .data-value {
+    font-size: 0.875rem; /* Adjust font size for labels and values */
+  }
   .data-value.highlight {
     font-size: 1.125rem; /* Adjust highlighted value font size for small screens */
   }
-}
-
-.title,
-.realtime-text {
-  cursor: default; /* Prevents cursor from changing to pointer on hover */
-}
-
-.status-text {
-  color: var(--text-secondary); /* Status text color */
-  font-size: 0.875rem; /* Status text font size */
-  cursor: default; /* Prevents cursor from changing to pointer on hover */
+  .status-indicator {
+    flex-direction: column; /* Stack status dot and text vertically */
+    gap: 0.25rem; /* Reduce gap between status dot and text */
+  }
 }
